@@ -8,7 +8,7 @@ def categorize_description(desc):
     desc = desc.lower()
     if any(word in desc for word in ['grocery', 'market', 'supermarket', 'whole foods', 'trader joe', 'safeway', 'qfc', 'wal-mart', 'sfc']):
         return 'Groceries'
-    elif any(word in desc for word in ['flight', 'airlines', 'uber', 'lyft', 'hotel', 'travel', 'alaska', 'delta', 'united', 'hawaiian', 'american', 'frontier', 'southwest', 'jetblue', 'hyatt', 'hilton', 'marriott', 'airalo', 'airbnb']):
+    elif any(word in desc for word in ['flight', 'airlines', 'uber', 'lyft', 'hotel', 'travel', 'transit', 'alaska', 'delta', 'united', 'hawaiian', 'american', 'frontier', 'southwest', 'jetblue', 'hyatt', 'hilton', 'marriott', 'airalo', 'airbnb']):
         return 'Travel'
     elif any(word in desc for word in ['restaurant', 'cafe', 'starbucks', 'chipotle', 'eatery', 'dining', 'burger', 'coffee']):
         return 'Eating Out'
@@ -43,5 +43,10 @@ for csv_file in csv_files:
         #         print(f"- {desc}")
 
         print("-"*40)
+
+        # Save Excel file with Budget Category column
+        # Allows for manual adjustments if necessary
+        excel_path = os.path.splitext(csv_file)[0] + '.xlsx'
+        df.to_excel(excel_path, index=False)
     else:
         print('No valid CSV files with Description and Amount columns found.')
